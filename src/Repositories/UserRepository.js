@@ -15,7 +15,7 @@ class UserRepository {
     });
   }
 
-  async listUsers(take, skip) {
+  async listAllUsers(take, skip) {
     await prisma.users.findMany({
       take,
       skip,
