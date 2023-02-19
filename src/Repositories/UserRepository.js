@@ -1,4 +1,4 @@
-import { prisma } from "../Config/database";
+import { prisma } from "../Config/database.js";
 
 class UserRepository {
   async insertUser(userInfo) {

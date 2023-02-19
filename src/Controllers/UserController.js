@@ -1,4 +1,4 @@
-import UserService from "../Services/UserService";
+import UserService from "../Services/UserService.js";
 
 class UserController {
   async insertUserController(req, res) {
@@ -7,7 +7,7 @@ class UserController {
     res.sendStatus(201);
   }
   async findeUserController(req, res) {
-    const { cpf } = req.body;
+    const { cpf } = req.params;
     const user = await UserService.findUser(cpf);
     res.send(user).status(200);
   }
