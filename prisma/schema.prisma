@@ -11,5 +11,5 @@ model users {
   id       Int      @id @default(autoincrement())
   name     String
   cpf      String   @unique @db.VarChar(11)
-  birthday DateTime @db.Date
+  birthday DateTime
 }

@@ -49,11 +49,15 @@ class UserService {
 
   async insertUser(name, cpf, birthday) {
     this.validateCpf(cpf);
-    let date = birthday.replace("/", "-");
+    let validCPF = cpf.replaceAll(".", "").replaceAll("-", "");
+    let date = birthday.replaceAll("/", "-");
     let dateArray = date.split("-");
-    let formatedBirthday =
-      dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
-    await UserRepository.insertUser(name, cpf, formatedBirthday);
+    let formatedBirthday = new Date(
+      dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0] + "Z"
+    ); //manipulação para manter o formato DD/MM/YYYY
+    console.log("data formatada" + formatedBirthday);
+    const data = { name, cpf: validCPF, birthday: formatedBirthday };
+    await UserRepository.insertUser(data);
   }
   async findUser(cpf) {
     this.validateCpf(cpf);
