@@ -8,11 +8,12 @@ class UserRepository {
   }
 
   async findUser(cpf) {
-    await prisma.users.findUnique({
+    const userData = await prisma.users.findUnique({
       where: {
         cpf,
       },
     });
+    return userData;
   }
 
   async listAllUsers(take, skip) {

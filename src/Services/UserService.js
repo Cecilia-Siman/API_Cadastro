@@ -9,7 +9,7 @@ class UserService {
     }
 
     //Algorithm to find first digit
-    let product;
+    let product = 0;
     let index = 0;
     let firstDigit;
     for (let i = 10; i >= 2; i--) {
@@ -24,7 +24,7 @@ class UserService {
     }
 
     //Algorithm to find second digit
-    let product2;
+    let product2 = 0;
     let index2 = 0;
     let secondDigit;
     for (let j = 11; j >= 2; j--) {
@@ -61,7 +61,8 @@ class UserService {
   }
   async findUser(cpf) {
     this.validateCpf(cpf);
-    const userData = await UserRepository.findUser(cpf);
+    const validCPF = cpf.replaceAll(".", "").replaceAll("-", "");
+    const userData = await UserRepository.findUser(validCPF);
     return userData;
   }
   async listAllUsers(take, skip) {
