@@ -17,10 +17,12 @@ class UserRepository {
   }
 
   async listAllUsers(take, skip) {
-    await prisma.users.findMany({
-      take,
-      skip,
+    const list = await prisma.users.findMany({
+      take: Number(take),
+      skip: Number(skip),
     });
+    console.log(list);
+    return list;
   }
 }
 

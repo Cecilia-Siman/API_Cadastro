@@ -66,6 +66,12 @@ class UserService {
     return userData;
   }
   async listAllUsers(take, skip) {
+    if (isNaN(take)) {
+      take = 10;
+    }
+    if (isNaN(skip)) {
+      skip = 0;
+    }
     const listUsers = await UserRepository.listAllUsers(take, skip);
     return listUsers;
   }

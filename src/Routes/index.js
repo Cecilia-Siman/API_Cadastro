@@ -5,6 +5,6 @@ const router = Router();
 
 router.post("/newClient", UserController.insertUserController);
 router.get("/findClient/:cpf", UserController.findeUserController);
-router.get("/listClients/?take?skip", UserController.listUsersController);
+router.get("/listClients", UserController.listUsersController);
 
 export default router;
