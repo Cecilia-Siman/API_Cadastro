@@ -9,6 +9,9 @@ class UserController {
   async findeUserController(req, res) {
     const { cpf } = req.params;
     const user = await UserService.findUser(cpf);
+    if (!user) {
+      throw { code: "Not Found", message: "CPF not registered" };
+    }
     res.send(user).status(200);
   }
   async listUsersController(req, res) {

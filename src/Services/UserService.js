@@ -5,7 +5,7 @@ class UserService {
     let cpfAsList = cpf.replaceAll(".", "").replaceAll("-", "");
     cpfAsList = cpfAsList.split("");
     if (cpfAsList.length != 11) {
-      console.log("Wrong size!");
+      throw { code: "Not Valid", message: "CPF not valid" };
     }
 
     //Algorithm to find first digit
@@ -43,20 +43,24 @@ class UserService {
       firstDigit != Number(cpfAsList[9]) ||
       secondDigit != Number(cpfAsList[10])
     ) {
-      console.log("Cpf not valid");
+      throw { code: "Not Valid", message: "CPF not valid" };
     }
   }
 
   async insertUser(name, cpf, birthday) {
     this.validateCpf(cpf);
+    const userData = await this.findUser(cpf);
+    if (userData) {
+      throw { code: "Not Valid", message: "CPF already registered" };
+    }
     let validCPF = cpf.replaceAll(".", "").replaceAll("-", "");
     let date = birthday.replaceAll("/", "-");
     let dateArray = date.split("-");
     let formatedBirthday = new Date(
       dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0] + "Z"
     ); //manipulação para manter o formato DD/MM/YYYY
-    console.log("data formatada" + formatedBirthday);
     const data = { name, cpf: validCPF, birthday: formatedBirthday };
+    console.log(data);
     await UserRepository.insertUser(data);
   }
   async findUser(cpf) {

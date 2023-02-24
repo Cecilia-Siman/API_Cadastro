@@ -6,7 +6,7 @@ const userSchema = Joi.object({
     .pattern(/^[0-9]{3}[.]?[0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2}$/)
     .required(),
   birthday: Joi.string()
-    .pattern(/^[0-9]{2}[/]?[-]?[0-9]{2}[/]?[-]?[0-9]{4}$/)
+    .pattern(/^[0-9]{2}[/|-][0-9]{2}[/|-][0-9]{4}$/)
     .required(),
 });
 
